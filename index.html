@@ -1,1 +1,57 @@
 
+import React, { useState } from "react"; import { Card, CardContent } from "@/components/ui/card"; import { Button } from "@/components/ui/button";
+
+export default function BrainBite() { const [user, setUser] = useState(null); const [email, setEmail] = useState(""); const [password, setPassword] = useState(""); const [topic, setTopic] = useState(""); const [result, setResult] = useState("");
+
+const login = () => { if (email && password) setUser(email); };
+
+const generateResult = () => { setResult(📘 Summary of ${topic}\n\n• Key concepts explained clearly\n• Important points highlighted\n• Exam‑oriented explanation\n\n📝 Sample MCQs generated\n1. What is ${topic}?\n2. Why is ${topic} important?\n\n📊 Performance Result\n✔ Understanding Level: Excellent\n✔ Exam Readiness: High); };
+
+return ( <div className="min-h-screen bg-gradient-to-tr from-[#0f2027] via-[#203a43] to-[#2c5364] text-white p-6"> <header className="flex justify-between items-center mb-10"> <h1 className="text-4xl font-extrabold tracking-wide">🧠 BrainBite</h1> <nav className="space-x-6 text-sm font-medium text-cyan-200"> <span>Home</span> <span>Summarizer</span> <span>MCQs</span> <span>Tests</span> <span>Addy AI</span> <span>Feedback</span> <span>Contact</span> </nav> </header>
+
+{!user ? (
+    <Card className="max-w-md mx-auto bg-black/40 border-cyan-500/20">
+      <CardContent className="p-6">
+        <h2 className="text-2xl mb-4 font-semibold">Login to BrainBite</h2>
+        <input className="w-full mb-3 p-2 rounded text-black" placeholder="Login ID / Email" onChange={e => setEmail(e.target.value)} />
+        <input type="password" className="w-full mb-3 p-2 rounded text-black" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+        <Button onClick={login} className="w-full">Enter</Button>
+      </CardContent>
+    </Card>
+  ) : (
+    <div className="grid lg:grid-cols-2 gap-8">
+      <Card className="bg-black/40">
+        <CardContent className="p-6">
+          <h2 className="text-2xl mb-3">📘 Topic Analyzer</h2>
+          <input className="w-full p-2 rounded text-black" placeholder="Enter any topic (Photosynthesis, Trigonometry…)" value={topic} onChange={e => setTopic(e.target.value)} />
+          <Button className="mt-4" onClick={generateResult}>Generate Results</Button>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-black/40">
+        <CardContent className="p-6">
+          <h2 className="text-2xl mb-3">📊 Smart Results</h2>
+          <pre className="whitespace-pre-wrap text-cyan-100">{result || "Results will appear here…"}</pre>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-black/40 lg:col-span-2">
+        <CardContent className="p-6">
+          <h2 className="text-2xl mb-2">🤖 Addy – Your AI Guide</h2>
+          <p className="text-cyan-200">Ask doubts in Hindi, English, Sanskrit & more. Career guidance + exam help.</p>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-black/40 lg:col-span-2">
+        <CardContent className="p-6 text-center">
+          <p>📩 Contact: aj436469@gmail.com</p>
+          <p className="text-sm text-gray-400 mt-2">100% Free | Student‑First AI Platform</p>
+        </CardContent>
+      </Card>
+    </div>
+  )}
+
+  <footer className="mt-12 text-center text-gray-400">© BrainBite | Learn Smart. Score More.</footer>
+</div>
+
+); }
